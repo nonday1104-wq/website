@@ -5,6 +5,9 @@ import streamlit as st
 # ==========================================
 query_params = st.query_params
 
+if query_params.get("key") != "safe123":
+    st.error("🔒 拒絕存取：此應用程式僅允許透過官方 Cloudflare 安全入口網站存取。")
+    st.stop()  # 直接中斷執行
 
 # ==========================================
 # 2. 🤖 這一區塊開始寫你的 AI 機器人程式碼
