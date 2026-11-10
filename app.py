@@ -1,17 +1,7 @@
 import streamlit as st
 
-# ==========================================
-# 1. 🛡️ 這一區塊是你的安全防盾（絕對不能刪除或更動）
-# ==========================================
-query_params = st.query_params
+st.set_page_config(page_title="智能 AI 助理", page_icon="🤖")
 
-if query_params.get("key") != "safe123":
-    st.error("🔒 拒絕存取：此應用程式僅允許透過官方 Cloudflare 安全入口網站存取。")
-    st.stop()  # 直接中斷執行
-
-# ==========================================
-# 2. 🤖 這一區塊開始寫你的 AI 機器人程式碼
-# ==========================================
 st.title("🤖 智能 AI 助理")
 st.caption("🚀 經由 Cloudflare 安全網路全程防護中")
 
@@ -29,14 +19,13 @@ if prompt := st.chat_input("請輸入您的問題..."):
     # 顯示使用者的訊息
     with st.chat_message("user"):
         st.markdown(prompt)
-    # 將使用者訊息存入歷史紀錄
     st.session_state.messages.append({"role": "user", "content": prompt})
 
     # 顯示 AI 的回應
     with st.chat_message("assistant"):
-        # 這裡你可以串接 OpenAI, Gemini API 或寫固定的回應規則
+        # 這裡可以串接 OpenAI、Gemini API 或寫固定的回應規則
+        # API 金鑰請放在 Render 的 Environment Variables，不要寫在程式碼裡
         ai_response = f"您好！我收到您的訊息了：『{prompt}』。這是一個串接成功的測試回應！"
         st.markdown(ai_response)
-        
-    # 將 AI 回應存入歷史紀錄
+
     st.session_state.messages.append({"role": "assistant", "content": ai_response})
